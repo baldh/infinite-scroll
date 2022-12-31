@@ -39,7 +39,6 @@ const showQuotes = async (page, limit) => {
       return
     }
     hideLoader()
-    quotesObserver.unobserve(loader)
   } catch(e) {
     console.error(e.message)
   }
@@ -66,7 +65,7 @@ function createQuotesObserver() {
   }
   const observer = new IntersectionObserver(entries => {
     console.log("observer loaded")
-    entries.forEach(async entry => {
+    entries.forEach(async (entry,observer) => {
       if(entry.isIntersecting) {
         await showQuotes(currentPage, limit)
       }
